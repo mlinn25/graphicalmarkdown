@@ -1,0 +1,93 @@
+---
+title: "Activity: Graphical Exploration"
+author: "YOUR NAME HERE"
+date: "Due Date: "
+output: html_notebook
+---
+
+
+
+## Front Matter
+
+Install supporting R packages with necessary functions and data sets. Note the line `rm(list = ls())` at the beginning of the code chunk, this will effectively reset your R environment which can help avoid bugs when an analysis gets more complicated.  
+
+
+```{r} 
+rm(list = ls())      # cleans up your R environment
+
+# load packages
+library(mosaic)
+library(tidyverse)   # loads a group of useful packages including `ggplot2`
+library(manipulate)
+library(esquisse)
+
+```
+
+
+
+### Explore the `diamonds` data
+
+*Task: Use R to produce one informative graphic of the `diamonds` data.  The graphic should represent AT LEAST 3 variables.  Write a few sentences to describe what we can learn from the graphic your have provided.  (Note: do NOT write your narrative inside the code chunk.)*
+
+
+```{r}
+# read `diamonds` data into R; it has been provided by the `ggplot2` package
+data("diamonds", package = "ggplot2")
+
+# add your code below for your data visualization
+#You can use a function like mplot() to generate your initial plot, but DO NOT include the interactive graph functions in your Rmd document. Only include the generated R code 
+```
+
+
+
+### Explore the cereal data
+
+*Task: Use R to produce one informative graphic of the `cereal.csv` data.  The graphic should represent AT LEAST 3 variables.  Write a few sentences to describe what we can learn from the graphic your have provided. (Note: do NOT write your narrative inside the code chunk.)*
+
+
+```{r}
+# read CSV data set into R
+CerealData <- read_csv(file = "cereal.csv")  
+
+# add your code below for your one key data visualization
+
+
+```
+
+
+
+
+
+### Extension: programming style
+
+The helper functions are great, but they produce ugly code.  Clean up the `ggplot2` code that reproduces the required plots so that it is consistent. The easiest style to pick is the one presented in R Programming Style Guide Appendix in the *DataComputing* eBook <https://dtkaplan.github.io/DataComputingEbook/>.  
+
+For example if you are plotting the diamonds data, the `esquisser()` function might generate the following code :
+
+```{r, eval = F}
+ggplot(diamonds,aes(x=x,y=depth,colour=cut))+
+geom_point(shape="circle",size=1.5)+scale_color_hue(direction=1) +theme_minimal()
+```
+
+But this code does not follow the styles we've talked about in class. For example, there are no spaces between any elements and the line breaks are not in the correct places. So we would clean up the code to look like this:
+
+
+```{r, eval = F}
+ggplot(diamonds, aes(x = x, y = depth, colour = cut)) +
+  geom_point(shape = "circle", size = 1.5) +
+  scale_color_hue(direction = 1) +
+  theme_minimal()
+```
+
+We might even want to add a title and appropriate axis labels: 
+
+```{r, eval = F}
+ggplot(diamonds, aes(x = x, y = depth, colour = cut)) +
+  geom_point(shape = "circle", size = 1.5) +
+  scale_color_hue(direction = 1) +
+  theme_minimal() +
+  ggtitle("Depth vs Length in Diamonds Dataset") +
+  xlab("Length in mm") +
+  ylab("Total Depth Percentage")
+```
+
